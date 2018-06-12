@@ -35,8 +35,17 @@ class App extends Component {
     tasks.push(task);
     this.setState({ tasks, isHomePage: true, currentSelected: -1 })
   }
-  deleteTask = (id) => {
-
+  deleteTask = (index) => {
+    // update code to remove by id
+    console.log('deleted task called', index)
+    let { tasks } = this.state;
+    console.log('task bfore deletion', tasks)
+    tasks.splice(index, 1)
+    console.log('task after deletion', tasks)
+    this.setState({
+      tasks,
+      isHomePage: true, currentSelected: -1
+    })
   }
   openSelectedRow = (index) => {
     console.log('index is clicked', index);
@@ -45,14 +54,24 @@ class App extends Component {
       currentSelected: index,
     })
   }
+  completeTask = (index) => {
+    let { tasks } = this.state;
+    tasks[index]['isCompleted'] = true;
+    this.setState({ tasks })
+  }
   render() {
     const { isHomePage, tasks, currentSelected } = this.state;
     console.log('task', tasks);
     return (
       <div className="App">{
-        isHomePage ? <Main togglePage={this.toggle} tasks={tasks} openRow={this.openSelectedRow} />
+        isHomePage ? <Main togglePage={this.toggle} tasks={tasks} openRow={this.openSelectedRow} completeTask={this.completeTask} />
           :
-          <AddTask togglePage={this.toggle} addTask={this.addTask} currentRow={currentSelected === -1 ? null : tasks[currentSelected]} />
+          <AddTask
+            togglePage={this.toggle}
+            addTask={this.addTask}
+            currentRow={currentSelected === -1 ? null : tasks[currentSelected]}
+            deleteTask={this.deleteTask}
+          />
       }
       </div>
     );

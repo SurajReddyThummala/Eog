@@ -4,12 +4,12 @@ import React from 'react'
 import './TaskRow.css'
 
 const TaskRow = (props) => {
-  const { currentRow } = props
   return props.tasks.map((task, index) => {
+    let textStyle = task.isCompleted ? { 'text-decoration': 'line-through' } : {}
     return (
       <div className={'card'}>
-        <span onClick={() => props.openRow(index)}>{task.title}</span>
-        <button style={{ background: 'gray', marginLeft: '2em' }}>complete</button>
+        <span onClick={() => props.openRow(index)} style={textStyle}>{task.title} </span>
+        <button style={{ background: '#E4E4E4', marginLeft: '2em' }} disabled={task.isCompleted} onClick={() => props.completeTask(index)}>complete</button>
       </div>
     )
   })

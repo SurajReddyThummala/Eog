@@ -9,7 +9,8 @@ class AddTask extends Component {
     this.state = {
       taskTitle: '',
       taskDesc: '',
-      isTaskCompleted: false
+      isTaskCompleted: false,
+      taskIndex: -1
     }
   }
   componentDidMount() {
@@ -18,7 +19,8 @@ class AddTask extends Component {
       this.setState({
         taskTitle: this.props.currentRow.title,
         taskDesc: this.props.currentRow.desc,
-        isTaskCompleted: this.props.currentRow.isCompleted
+        isTaskCompleted: this.props.currentRow.isCompleted,
+        taskIndex: this.props.currentRow.id
       })
     }
 
@@ -33,7 +35,7 @@ class AddTask extends Component {
     })
   }
   render() {
-    const { taskTitle, taskDesc, isTaskCompleted } = this.state;
+    const { taskTitle, taskDesc, isTaskCompleted, taskIndex } = this.state;
     return (
       <div>
         <button style={{ backgroundColor: 'red' }} onClick={() => this.props.togglePage()}>back</button>
@@ -47,7 +49,7 @@ class AddTask extends Component {
         <div>
           <span>task</span>
           <input type="text" class="text-line" onChange={(e) => { this.setState({ taskTitle: e.target.value }) }} value={taskTitle} />
-          <button style={{ backgroundColor: 'gray' }} > Complete</button>
+          <button style={{ backgroundColor: '#E4E4E4' }} disabled={isTaskCompleted}> Complete</button>
         </div>
         <div>
           <span>Description</span>
@@ -56,7 +58,7 @@ class AddTask extends Component {
         <div>
           <button style={{ backgroundColor: 'gray' }} onClick={this.addtask}> Save</button>
           <button style={{ backgroundColor: 'gray' }} onClick={() => this.props.togglePage()}> Cancel</button>
-          <button style={{ backgroundColor: 'gray' }}> Delete</button>
+          <button style={{ backgroundColor: 'gray' }} onClick={() => this.props.deleteTask(taskIndex)}> Delete</button>
         </div>
 
       </div>

@@ -14,7 +14,7 @@ class Main extends Component {
         <h2>Todo</h2>
         <hr />
         <button style={{ backgroundColor: '#47bbf6' }} onClick={() => this.props.togglePage()}> Add new task</button>
-        <TaskRow tasks={this.props.tasks} openRow={this.props.openRow} />
+        <TaskRow {...this.props} />
       </div>
     );
   }
