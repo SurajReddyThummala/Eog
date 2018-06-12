@@ -1,0 +1,15 @@
+.AddTask {
+  text-align: center;
+}
+
+.text-line {
+    background-color: transparent;
+    color: #1a1919;
+    outline: none;
+    outline-style: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid #1f1f1f 1px;
+    padding: 3px 10px;
+}
