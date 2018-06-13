@@ -45,3 +45,9 @@
   height: 3em;
   color: black;
 }
+.completeButton {
+     background-color: #E4E4E4;
+}
+.completeButton:disabled{
+    cursor: not-allowed
+}

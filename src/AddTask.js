@@ -48,7 +48,7 @@ class AddTask extends Component {
             float: 'left'
           }}>task</span>
           <input type="text" className="text-line" onChange={(e) => { this.setState({ taskTitle: e.target.value }) }} value={taskTitle} />
-          <button style={{ backgroundColor: '#E4E4E4' }} disabled={(taskIndex > -1 && !isTaskCompleted ? false : true)} onClick={this.completeCurrentTask}> Complete</button>
+          <button className="completeButton" disabled={(taskIndex > -1 && !isTaskCompleted ? false : true)} onClick={this.completeCurrentTask}> Complete</button>
         </div>
         <div>
           <span style={{

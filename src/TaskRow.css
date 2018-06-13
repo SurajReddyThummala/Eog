@@ -6,3 +6,12 @@
     margin-top: 20px;
     height: 40px;
 }
+.taskRowButton {
+     background-color: #E4E4E4;
+     margin-left: 2em;
+     width: 20%;
+}
+.taskRowButton:disabled{
+    cursor: not-allowed
+}
+
