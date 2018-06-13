@@ -31,27 +31,39 @@ class App extends Component {
   }
   addTask = (task) => {
     let { tasks } = this.state;
-    task['id'] = tasks.length;
-    tasks.push(task);
-    this.setState({ tasks, isHomePage: true, currentSelected: -1 })
+    let { id } = task;
+    if (id === null) { // case of new task
+      console.log('going to if', task)
+      task['id'] = tasks.length;
+      tasks.push(task);
+      this.setState({ tasks, isHomePage: true, currentSelected: -1 })
+    } else { // case of update the existing
+      console.log('going to else', task)
+      tasks[task.id] = task
+      this.setState({ tasks, isHomePage: true, currentSelected: -1 })
+    }
+
   }
-  deleteTask = (index) => {
+  deleteTask = (id) => {
     // update code to remove by id
-    console.log('deleted task called', index)
+    console.log('deleted task called', id)
     let { tasks } = this.state;
+    const indexForDeletion = tasks.findIndex((item, index) => {
+      return item.id === id;
+    })
     console.log('task bfore deletion', tasks)
-    tasks.splice(index, 1)
+    tasks.splice(indexForDeletion, 1)
     console.log('task after deletion', tasks)
     this.setState({
       tasks,
       isHomePage: true, currentSelected: -1
     })
   }
-  openSelectedRow = (index) => {
+  openSelectedRow = (index, id) => {
     console.log('index is clicked', index);
     this.setState({
       isHomePage: !this.state.isHomePage,
-      currentSelected: index,
+      currentSelected: id,
     })
   }
   completeTask = (index) => {
@@ -64,11 +76,19 @@ class App extends Component {
     console.log('task', tasks);
     return (
       <div className="App">{
-        isHomePage ? <Main togglePage={this.toggle} tasks={tasks} openRow={this.openSelectedRow} completeTask={this.completeTask} />
+        isHomePage ?
+          <Main
+            togglePage={this.toggle}
+            tasks={tasks}
+            openRow={this.openSelectedRow}
+            completeTask={this.completeTask}
+            deleteTask={this.deleteTask}
+          />
           :
           <AddTask
             togglePage={this.toggle}
             addTask={this.addTask}
+            completeTask={this.completeTask}
             currentRow={currentSelected === -1 ? null : tasks[currentSelected]}
             deleteTask={this.deleteTask}
           />

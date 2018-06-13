@@ -13,3 +13,35 @@
     border-bottom: solid #1f1f1f 1px;
     padding: 3px 10px;
 }
+
+.mybutton{
+   opacity: 0.6;
+   cursor: not-allowed;
+}
+.saveButton{
+  background-color: #47bbf6;
+  width: 7em;
+  height: 3em;
+  color: white;
+}
+.saveButton:disabled{
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.deleteButton{
+  background-color: #E37475;
+  width: 7em;
+  height: 3em;
+  color: white;
+}
+.deleteButton:disabled{
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cancelButton{
+  background-color: #47bbf6;
+  width: 7em;
+  height: 3em;
+  color: black;
+}

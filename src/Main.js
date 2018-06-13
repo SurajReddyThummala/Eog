@@ -13,7 +13,9 @@ class Main extends Component {
       <div>
         <h2>Todo</h2>
         <hr />
-        <button style={{ backgroundColor: '#47bbf6' }} onClick={() => this.props.togglePage()}> Add new task</button>
+        <button style={{
+          backgroundColor: '#47bbf6', width: '10em', height: '3em', color: 'white'
+        }} onClick={() => this.props.togglePage()}> Add new task</button>
         <TaskRow {...this.props} />
       </div>
     );

@@ -27,38 +27,47 @@ class AddTask extends Component {
   }
 
   addtask = () => {
-    const { taskTitle, taskDesc, isTaskCompleted } = this.state;
+    const { taskTitle, taskDesc, isTaskCompleted, taskIndex } = this.state;
     this.props.addTask({
+      id: taskIndex > -1 ? taskIndex : null,
       title: taskTitle,
       desc: taskDesc,
       isCompleted: isTaskCompleted
     })
   }
+  completeCurrentTask = () => {
+    const { taskIndex } = this.state;
+    // if (taskIndex > -1) {
+    this.setState({
+      isTaskCompleted: true
+    })
+    // }
+  }
   render() {
     const { taskTitle, taskDesc, isTaskCompleted, taskIndex } = this.state;
     return (
       <div>
-        <button style={{ backgroundColor: 'red' }} onClick={() => this.props.togglePage()}>back</button>
-        {/* <div className="input-group mb-3" style={{ display: 'flex' }}>
-          <input type="text" className="form-control" placeholder="Add task" aria-label="Add task" aria-describedby="basic-addon2" />
-          <Button >Complete</Button>
-        </div>
-        <div className="input-group mb-3" style={{ display: 'flex' }}>
-          <input type="text" className="form-control" placeholder="Description" aria-label="Add task" aria-describedby="basic-addon2" />
-        </div> */}
-        <div>
-          <span>task</span>
-          <input type="text" class="text-line" onChange={(e) => { this.setState({ taskTitle: e.target.value }) }} value={taskTitle} />
-          <button style={{ backgroundColor: '#E4E4E4' }} disabled={isTaskCompleted}> Complete</button>
+        <button style={{ fontWeight: 'bold' }} onClick={() => this.props.togglePage()}>&lt; Back to Task</button>
+        <div style={{ 'margin-top': '1em' }}>
+          <span style={{
+            width: '100%',
+            float: 'left'
+          }}>task</span>
+          <input type="text" className="text-line" onChange={(e) => { this.setState({ taskTitle: e.target.value }) }} value={taskTitle} />
+          <button style={{ backgroundColor: '#E4E4E4' }} disabled={(taskIndex > -1 && !isTaskCompleted ? false : true)} onClick={this.completeCurrentTask}> Complete</button>
         </div>
         <div>
-          <span>Description</span>
-          <input type="text" class="text-line" onChange={(e) => { this.setState({ taskDesc: e.target.value }) }} value={taskDesc} />
+          <span style={{
+            width: '100%',
+            float: 'left',
+            'margin-top': '1em',
+          }}>Description</span>
+          <input type="text" className="text-line" onChange={(e) => { this.setState({ taskDesc: e.target.value }) }} value={taskDesc} />
         </div>
-        <div>
-          <button style={{ backgroundColor: 'gray' }} onClick={this.addtask}> Save</button>
-          <button style={{ backgroundColor: 'gray' }} onClick={() => this.props.togglePage()}> Cancel</button>
-          <button style={{ backgroundColor: 'gray' }} onClick={() => this.props.deleteTask(taskIndex)}> Delete</button>
+        <div style={{ 'margin-top': '2em', }}>
+          <button className="saveButton" onClick={this.addtask} disabled={(taskTitle === '' ? true : false)}> Save</button>
+          <button className="cancelButton" onClick={() => this.props.togglePage()}> Cancel</button>
+          <button className="deleteButton" onClick={() => this.props.deleteTask(taskIndex)} disabled={(taskIndex > -1 ? false : true)}> Delete</button>
         </div>
 
       </div>
