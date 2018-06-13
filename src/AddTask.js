@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-// import 'bootstrap/dist/css/bootstrap.css';
-// import 'bootstrap/dist/css/bootstrap-theme.css';
-import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 import './AddTask.css'
 class AddTask extends Component {
   constructor(props) {
@@ -14,7 +11,7 @@ class AddTask extends Component {
     }
   }
   componentDidMount() {
-    console.log('componentDidMount', this.props);
+    //console.log('componentDidMount', this.props);
     if (this.props.currentRow) {
       this.setState({
         taskTitle: this.props.currentRow.title,
@@ -36,19 +33,16 @@ class AddTask extends Component {
     })
   }
   completeCurrentTask = () => {
-    const { taskIndex } = this.state;
-    // if (taskIndex > -1) {
     this.setState({
       isTaskCompleted: true
     })
-    // }
   }
   render() {
     const { taskTitle, taskDesc, isTaskCompleted, taskIndex } = this.state;
     return (
       <div>
         <button style={{ fontWeight: 'bold' }} onClick={() => this.props.togglePage()}>&lt; Back to Task</button>
-        <div style={{ 'margin-top': '1em' }}>
+        <div style={{ marginTop: '1em' }}>
           <span style={{
             width: '100%',
             float: 'left'
@@ -60,11 +54,11 @@ class AddTask extends Component {
           <span style={{
             width: '100%',
             float: 'left',
-            'margin-top': '1em',
+            marginTop: '1em',
           }}>Description</span>
           <input type="text" className="text-line" onChange={(e) => { this.setState({ taskDesc: e.target.value }) }} value={taskDesc} />
         </div>
-        <div style={{ 'margin-top': '2em', }}>
+        <div style={{ marginTop: '2em', }}>
           <button className="saveButton" onClick={this.addtask} disabled={(taskTitle === '' ? true : false)}> Save</button>
           <button className="cancelButton" onClick={() => this.props.togglePage()}> Cancel</button>
           <button className="deleteButton" onClick={() => this.props.deleteTask(taskIndex)} disabled={(taskIndex > -1 ? false : true)}> Delete</button>

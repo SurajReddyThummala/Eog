@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import AddTask from './AddTask';
 import Main from './Main';
@@ -33,12 +32,12 @@ class App extends Component {
     let { tasks } = this.state;
     let { id } = task;
     if (id === null) { // case of new task
-      console.log('going to if', task)
+      ////////console.log('going to if', task)
       task['id'] = tasks.length;
       tasks.push(task);
       this.setState({ tasks, isHomePage: true, currentSelected: -1 })
     } else { // case of update the existing
-      console.log('going to else', task)
+      ////////console.log('going to else', task)
       tasks[task.id] = task
       this.setState({ tasks, isHomePage: true, currentSelected: -1 })
     }
@@ -46,24 +45,24 @@ class App extends Component {
   }
   deleteTask = (id) => {
     // update code to remove by id
-    console.log('deleted task called', id)
+    ////////console.log('deleted task called', id)
     let { tasks } = this.state;
     const indexForDeletion = tasks.findIndex((item, index) => {
       return item.id === id;
     })
-    console.log('task bfore deletion', tasks)
+    ////////console.log('task bfore deletion', tasks)
     tasks.splice(indexForDeletion, 1)
-    console.log('task after deletion', tasks)
+    ////////console.log('task after deletion', tasks)
     this.setState({
       tasks,
       isHomePage: true, currentSelected: -1
     })
   }
   openSelectedRow = (index, id) => {
-    console.log('index is clicked', index);
+    ////////console.log('index is clicked', index);
     this.setState({
       isHomePage: !this.state.isHomePage,
-      currentSelected: id,
+      currentSelected: index,
     })
   }
   completeTask = (index) => {
@@ -73,7 +72,7 @@ class App extends Component {
   }
   render() {
     const { isHomePage, tasks, currentSelected } = this.state;
-    console.log('task', tasks);
+    ////////console.log('task', tasks);
     return (
       <div className="App">{
         isHomePage ?
